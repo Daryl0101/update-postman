@@ -1,4 +1,4 @@
-# Update Postman
+# Update Postman Collection
 Imports the latest version of `swagger.json` and update the respective Postman collection using Python.
 
 ## To get things started:
