@@ -5,22 +5,10 @@ It is best to leave this file untouched
 import requests
 import json
 import os
-import itertools
-import threading
-import time
-import sys
 import global_data
+from loader import Loader
 
-# Updating animation
-def animate():
-    for c in itertools.cycle(['|', '/', '-', '\\']):
-        if done:
-            break
-        sys.stdout.write('\rPostman update in progress ' + c)
-        sys.stdout.flush()
-        time.sleep(0.1)
-    sys.stdout.write('\rDone!     ')
-
+# Environment choice validation
 def ValidateEnvironmentChoice(choice):
     enumValues = [i.value for i in global_data.Environ]
     if choice not in enumValues:
@@ -77,9 +65,7 @@ headers = {
 }
 
 # Loading animation
-done = False
-t = threading.Thread(target=animate)
-t.start()
+loader = Loader('Postman update in progress...').start()
 
 # Send request
 response = requests.put(
@@ -87,7 +73,8 @@ response = requests.put(
     data = newData,
     headers = headers
 )
-done = True
+
+loader.stop()
 
 # Output response
 print('\nStatus :', response.status_code)
