@@ -3,7 +3,8 @@ Imports the latest version of `swagger.json` and update the respective Postman c
 
 ## To get things started:
 1. Pull this repo.
-2. Install dependencies in `requirements.txt` file.
-3. Edit your secrets in the `.env` file.
-4. Add new environments in the `global_data.py` file. [optional]
-5. Execute `main.py`.
+2. Create a `venv` virtual environment.
+3. Install dependencies in `requirements.txt` file.
+4. Edit your secrets in the `.env` file.
+5. Add new environments in the `global_data.py` file. [optional]
+6. Execute `main.py`.
