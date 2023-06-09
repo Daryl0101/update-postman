@@ -22,8 +22,8 @@ choice = int(input('Select the environment: '))
 ValidateEnvironmentChoice(choice)
 
 # Download latest version of openapi json file
-url = global_data.Path[choice]
-response = requests.get(url)
+url = global_data.Path[choice]['url']
+response = requests.get(url, verify = False)
 data = response.json()
 with open('files/swagger.json', 'w') as f:
     json.dump(data, f)
@@ -40,7 +40,7 @@ convertedFile.close()
 convertedData = {
     'collection':{
         'info':{
-            "name": global_data.collectionName,
+            "name": global_data.Path[choice]['collectionName'],
             "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
         },
         'item': convertedData['item']
@@ -69,7 +69,7 @@ loader = Loader('Postman update in progress...').start()
 
 # Send request
 response = requests.put(
-    f'https://api.getpostman.com/collections/{global_data.collectionUid}',
+    f'https://api.getpostman.com/collections/{global_data.Path[choice]["collectionUid"]}',
     data = newData,
     headers = headers
 )
